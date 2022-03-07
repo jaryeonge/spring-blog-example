@@ -1,5 +1,6 @@
 package org.example.blog.test;
 
+import org.example.blog.model.RoleType;
 import org.example.blog.model.User;
 import org.example.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class DummyControllerTest {
         System.out.println("role: " + user.getRole());
         System.out.println("createDate: " + user.getCreateDate());
 
-        user.setRole("user");
+        user.setRole(RoleType.USER);
         userRepository.save(user);
         return "회원가입이 완료되었습니다.";
     }

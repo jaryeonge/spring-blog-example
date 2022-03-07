@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -33,8 +31,9 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @ColumnDefault("'user'") // 문자라는 것을 알려줘야 한다.
-    private String role; // Enum 을 쓰는 것이 좋다. // admin, user, manager
+    // @ColumnDefault("'user'")
+    @Enumerated(EnumType.STRING)
+    private RoleType role; // Enum 을 쓰는 것이 좋다. // admin, user, manager
 
     @CreationTimestamp // 시간 자동입력
     private Timestamp createDate;
