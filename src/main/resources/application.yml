@@ -24,12 +24,3 @@ spring:
       hibernate:
         show_sql: false
         format_sql: true
-
-#  security:
-#    user:
-#      name: root
-#      password: root
-#      roles: ADMIN
-
-## kakao register password key, have to be private!!!
-# root.key: AnyKeyYouWantTo
