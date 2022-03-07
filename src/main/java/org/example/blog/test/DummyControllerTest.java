@@ -4,9 +4,13 @@ import org.example.blog.model.RoleType;
 import org.example.blog.model.User;
 import org.example.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.function.Supplier;
+import java.util.List;
 
 @RestController
 public class DummyControllerTest {
@@ -26,6 +30,17 @@ public class DummyControllerTest {
         user.setRole(RoleType.USER);
         userRepository.save(user);
         return "회원가입이 완료되었습니다.";
+    }
+
+    @GetMapping("/dummy/users")
+    public List<User> list() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/dummy/user")
+    public List<User> pageList(@PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<User> pagingUser =  userRepository.findAll(pageable);
+        return pagingUser.getContent();
     }
 
     @GetMapping("/dummy/user/{id}")
