@@ -1,0 +1,35 @@
+server.port: 8080
+
+# Logging Level
+logging.level.org.hibernate.type.descriptor.sql: debug
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: blog
+    password: blog
+    url: jdbc:mariadb://localhost:3307/blog
+
+  # create, update, none, create-drop. validate
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  # Entity naming --> camelCase // physical-strategy
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+
+    # Jpa Properties
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+
+#  security:
+#    user:
+#      name: root
+#      password: root
+#      roles: ADMIN
+
+## kakao register password key, have to be private!!!
+# root.key: AnyKeyYouWantTo
