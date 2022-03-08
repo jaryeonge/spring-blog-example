@@ -4,6 +4,7 @@ import org.example.blog.model.RoleType;
 import org.example.blog.model.User;
 import org.example.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,17 @@ public class DummyControllerTest {
 
     @Autowired // 의존성 주입
     private UserRepository userRepository;
+
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return "삭제에 실패하였습니다. 해당 id: " + id + "는 DB에 없습니다.";
+        }
+
+        return "삭제 되었습니다. id: " + id;
+    }
 
     // dirty checking
     // 1차 캐시에 있는 객체의 변경을 감지해서 자동 DB 업데이트
@@ -36,7 +48,7 @@ public class DummyControllerTest {
         // save 함수는 id 를 전달하면 해당 id 에 대한 데이터가 있으면 update 를 해주고
         // save 함수는 id 를 전달하면 해당 id 에 대한 데이터가 없으면 insert 를 한다.
         // userRepository.save(user);
-        return null;
+        return user;
     }
 
     @PostMapping("/dummy/join")
