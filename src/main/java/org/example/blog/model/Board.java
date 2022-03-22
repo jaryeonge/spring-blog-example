@@ -31,7 +31,8 @@ public class Board {
     @ColumnDefault("0")
     private int count;
 
-    @ManyToOne(fetch = FetchType.EAGER) // Many = Board, One = User
+    // Many = Board, One = User
+    @ManyToOne(fetch = FetchType.EAGER) // LAZY: 최초에 조인 안 해서 들고 옴(proxy 객체), EAGER: 조인해서 들고 옴
     @JoinColumn(name="userId")
     private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
 
