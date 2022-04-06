@@ -10,7 +10,7 @@ import java.util.Collection;
 // 스프링 시큐리티가 로그인 요청을 가로채서 로그인을 진행하고 완료가 되면 UserDetails 타입의 오브젝트를
 // 스프링 시큐리티의 고유한 세션저장소에 저장을 해준다.
 public class PrincipalDetail implements UserDetails {
-    private User user;
+    private final User user;
 
     public PrincipalDetail(User user) {
         this.user = user;
@@ -50,7 +50,7 @@ public class PrincipalDetail implements UserDetails {
         return true;
     }
 
-    // 계정이 갖고있는 구너한 목록을 리턴한다. (권한이 여러개면 루프를 돌아야 한다.)
+    // 계정이 갖고있는 권한 목록을 리턴한다. (권한이 여러개면 루프를 돌아야 한다.)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
